@@ -1,0 +1,374 @@
+{
+  "target": "python examples\\demo\\compliant_server.py",
+  "ok": true,
+  "summary": {
+    "checks": 20,
+    "checks_passed": 20,
+    "checks_skipped": 0,
+    "errors_failed": 0,
+    "warnings_failed": 0,
+    "fuzz_cases": 28,
+    "fuzz_bad": 0,
+    "fuzz_weak": 0
+  },
+  "checks": [
+    {
+      "id": "initialize/server-info",
+      "title": "serverInfo is present and complete",
+      "severity": "error",
+      "status": "pass",
+      "detail": "demo-compliant 1.0.0",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "initialize/protocol-version",
+      "title": "protocolVersion is a known MCP version",
+      "severity": "error",
+      "status": "pass",
+      "detail": "2025-06-18",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "initialize/capabilities",
+      "title": "capabilities is a non-empty object",
+      "severity": "error",
+      "status": "pass",
+      "detail": "prompts, resources, tools",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "initialize/tools-honesty",
+      "title": "tools capability matches tools/list",
+      "severity": "error",
+      "status": "pass",
+      "detail": "capability and tools/list agree",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "jsonrpc/version",
+      "title": "responses use jsonrpc 2.0",
+      "severity": "error",
+      "status": "pass",
+      "detail": "2.0",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "jsonrpc/id-echo",
+      "title": "response ids echo the request id",
+      "severity": "error",
+      "status": "pass",
+      "detail": "integer and string ids echoed",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "jsonrpc/notification-silence",
+      "title": "notifications produce no reply",
+      "severity": "error",
+      "status": "pass",
+      "detail": "notifications produce no reply",
+      "duration_ms": 62.0
+    },
+    {
+      "id": "errors/unknown-method",
+      "title": "unknown methods return -32601",
+      "severity": "error",
+      "status": "pass",
+      "detail": "-32601",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "errors/invalid-params",
+      "title": "invalid params return -32602",
+      "severity": "error",
+      "status": "pass",
+      "detail": "code -32602",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "errors/shape",
+      "title": "errors carry an integer code and a message",
+      "severity": "error",
+      "status": "pass",
+      "detail": "code -32601, message present",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/list/shape",
+      "title": "tools/list returns well-formed tool objects",
+      "severity": "error",
+      "status": "pass",
+      "detail": "2 tool(s)",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/list/unique-names",
+      "title": "tool names are unique and trimmed",
+      "severity": "error",
+      "status": "pass",
+      "detail": "2 unique name(s)",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/list/schema-type",
+      "title": "inputSchema is an object schema",
+      "severity": "warning",
+      "status": "pass",
+      "detail": "all schemas are objects",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/list/pagination",
+      "title": "nextCursor terminates",
+      "severity": "warning",
+      "status": "pass",
+      "detail": "single page",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/call/unknown-tool",
+      "title": "unknown tools are rejected",
+      "severity": "error",
+      "status": "pass",
+      "detail": "code -32602",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/call/missing-required",
+      "title": "required arguments are enforced",
+      "severity": "error",
+      "status": "pass",
+      "detail": "rejected with code -32602",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/call/synthetic",
+      "title": "a synthetic call returns content",
+      "severity": "warning",
+      "status": "pass",
+      "detail": "content type 'text'",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "resources/list",
+      "title": "resources/list matches its capability",
+      "severity": "warning",
+      "status": "pass",
+      "detail": "1 resource(s)",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "prompts/list",
+      "title": "prompts/list matches its capability",
+      "severity": "warning",
+      "status": "pass",
+      "detail": "1 prompt(s)",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "performance/ping",
+      "title": "ping latency is acceptable",
+      "severity": "info",
+      "status": "pass",
+      "detail": "ping averages 0 ms",
+      "duration_ms": 0.0
+    }
+  ],
+  "fuzz": [
+    {
+      "id": "invalid-json-brace",
+      "description": "a single brace",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "invalid-json-text",
+      "description": "plain text instead of JSON",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "json-array",
+      "description": "a batch array instead of an object",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 157.0
+    },
+    {
+      "id": "missing-jsonrpc",
+      "description": "no jsonrpc field",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "wrong-jsonrpc",
+      "description": "jsonrpc 1.0",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "missing-method",
+      "description": "no method field",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "method-not-string",
+      "description": "method is a number",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 157.0
+    },
+    {
+      "id": "id-object",
+      "description": "id is an object",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "params-string",
+      "description": "params is a string",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "params-array",
+      "description": "params is an array",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "unknown-method",
+      "description": "an unknown method",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 157.0
+    },
+    {
+      "id": "long-method",
+      "description": "a 5000 character method name",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "huge-params",
+      "description": "a 200 KB string in params",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "deep-nesting",
+      "description": "200 levels of nesting in params",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "unicode-method",
+      "description": "an emoji method name",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 157.0
+    },
+    {
+      "id": "control-chars",
+      "description": "a NUL byte in params",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "duplicate-keys",
+      "description": "a duplicate jsonrpc key",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "null-id",
+      "description": "a null id (treat as a notification)",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "negative-id",
+      "description": "a negative id",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 157.0
+    },
+    {
+      "id": "float-id",
+      "description": "a fractional id",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "tools-call-no-params",
+      "description": "tools/call without params",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "tools-call-null-params",
+      "description": "tools/call with null params",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "tools-call-empty-params",
+      "description": "tools/call with empty params",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 157.0
+    },
+    {
+      "id": "tools-call-args-string",
+      "description": "tool arguments as a string",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "initialize-null-params",
+      "description": "initialize with null params",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "notification-unknown",
+      "description": "an unknown notification",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    },
+    {
+      "id": "empty-line",
+      "description": "an empty line",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 157.0
+    },
+    {
+      "id": "whitespace-line",
+      "description": "a whitespace-only line",
+      "outcome": "ok",
+      "detail": "",
+      "duration_ms": 156.0
+    }
+  ]
+}

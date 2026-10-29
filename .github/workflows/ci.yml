@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: py${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: python -m pip install -e .
+      - name: Compile
+        run: python -m compileall -q mcpcheck
+      - name: Tests
+        run: python -m unittest discover -s tests -v
+      - name: Demo, positive control
+        run: |
+          mcpcheck demo -o /tmp/demo
+          mcpcheck run --stdio "python /tmp/demo/compliant_server.py" \
+            --json /tmp/conformance.json -o /tmp/conformance.md --quiet
+      - name: Demo, negative control
+        run: |
+          if mcpcheck run --stdio "python /tmp/demo/sloppy_server.py" --quiet; then
+            echo "the sloppy server was expected to fail"
+            exit 1
+          fi
+      - name: No third-party imports
+        run: python scripts/check_stdlib_only.py

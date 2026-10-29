@@ -1,0 +1,185 @@
+{
+  "target": "python examples\\demo\\sloppy_server.py",
+  "ok": false,
+  "summary": {
+    "checks": 20,
+    "checks_passed": 6,
+    "checks_skipped": 0,
+    "errors_failed": 11,
+    "warnings_failed": 3,
+    "fuzz_cases": 1,
+    "fuzz_bad": 1,
+    "fuzz_weak": 0
+  },
+  "checks": [
+    {
+      "id": "initialize/server-info",
+      "title": "serverInfo is present and complete",
+      "severity": "error",
+      "status": "fail",
+      "detail": "serverInfo.name must be a non-empty string, got ''",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "initialize/protocol-version",
+      "title": "protocolVersion is a known MCP version",
+      "severity": "error",
+      "status": "fail",
+      "detail": "protocolVersion '1.0' is not a known MCP version (2025-06-18, 2025-03-26, 2024-11-05)",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "initialize/capabilities",
+      "title": "capabilities is a non-empty object",
+      "severity": "error",
+      "status": "fail",
+      "detail": "capabilities is empty: the server advertises nothing",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "initialize/tools-honesty",
+      "title": "tools capability matches tools/list",
+      "severity": "error",
+      "status": "fail",
+      "detail": "tools/list works but the tools capability is not advertised",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "jsonrpc/version",
+      "title": "responses use jsonrpc 2.0",
+      "severity": "error",
+      "status": "pass",
+      "detail": "2.0",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "jsonrpc/id-echo",
+      "title": "response ids echo the request id",
+      "severity": "error",
+      "status": "pass",
+      "detail": "integer and string ids echoed",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "jsonrpc/notification-silence",
+      "title": "notifications produce no reply",
+      "severity": "error",
+      "status": "fail",
+      "detail": "server replied to a notification during the handshake: '{\"jsonrpc\": \"2.0\", \"id\": null, \"result\": {}}\\n'",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "errors/unknown-method",
+      "title": "unknown methods return -32601",
+      "severity": "error",
+      "status": "fail",
+      "detail": "unknown method returned a result instead of an error",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "errors/invalid-params",
+      "title": "invalid params return -32602",
+      "severity": "error",
+      "status": "fail",
+      "detail": "tools/call with a non-string name returned a result",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "errors/shape",
+      "title": "errors carry an integer code and a message",
+      "severity": "error",
+      "status": "fail",
+      "detail": "no error to inspect",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/list/shape",
+      "title": "tools/list returns well-formed tool objects",
+      "severity": "error",
+      "status": "pass",
+      "detail": "2 tool(s)",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/list/unique-names",
+      "title": "tool names are unique and trimmed",
+      "severity": "error",
+      "status": "fail",
+      "detail": "duplicate tool names: add",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/list/schema-type",
+      "title": "inputSchema is an object schema",
+      "severity": "warning",
+      "status": "fail",
+      "detail": "tool 'add' inputSchema.type is 'string', expected 'object'",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/list/pagination",
+      "title": "nextCursor terminates",
+      "severity": "warning",
+      "status": "pass",
+      "detail": "single page",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/call/unknown-tool",
+      "title": "unknown tools are rejected",
+      "severity": "error",
+      "status": "fail",
+      "detail": "calling an unknown tool returned a successful result",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/call/missing-required",
+      "title": "required arguments are enforced",
+      "severity": "error",
+      "status": "fail",
+      "detail": "tool 'add' accepted a call with its required arguments missing",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "tools/call/synthetic",
+      "title": "a synthetic call returns content",
+      "severity": "warning",
+      "status": "pass",
+      "detail": "content type 'text'",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "resources/list",
+      "title": "resources/list matches its capability",
+      "severity": "warning",
+      "status": "fail",
+      "detail": "resources/list result.resources must be an array",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "prompts/list",
+      "title": "prompts/list matches its capability",
+      "severity": "warning",
+      "status": "fail",
+      "detail": "prompts/list result.prompts must be an array",
+      "duration_ms": 0.0
+    },
+    {
+      "id": "performance/ping",
+      "title": "ping latency is acceptable",
+      "severity": "info",
+      "status": "pass",
+      "detail": "ping averages 0 ms",
+      "duration_ms": 0.0
+    }
+  ],
+  "fuzz": [
+    {
+      "id": "invalid-json-brace",
+      "description": "a single brace",
+      "outcome": "bad",
+      "detail": "server exited: server exited",
+      "duration_ms": 0.0
+    }
+  ]
+}
