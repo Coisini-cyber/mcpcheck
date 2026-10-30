@@ -1,5 +1,7 @@
 # mcpcheck
 
+[![ci](https://github.com/Coisini-cyber/mcpcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/Coisini-cyber/mcpcheck/actions/workflows/ci.yml)
+
 **Conformance and fuzz checks for MCP servers, in one CI command.**
 
 Model Context Protocol servers now sit between agents and everything they
